@@ -14,6 +14,7 @@
     myArray.value.push({
       content: input_content.value,
       category: input_category.value,
+      done: false,
     })
 
     input_content.value = ''
@@ -26,7 +27,7 @@
 
   <main class="app">
 
-    <section class="gretting">
+    <section class="greeting">
       <h2 class="title">
         Welcome back, <input type="text" placeholder="Enter Name" v-model="name">
       </h2>
@@ -53,11 +54,19 @@
       </div>
       <input type="submit" value="Add To Do"/>
     </form>
-
-    </section>
+  </section>
 
     <section class="todo-list">
-
+      <div class="list">
+        <div v-for="x in myArray" :class="`todo-item ${x.done ? 'done' : 'not-done'}`" :key="x">
+          <label>
+            <input type="checkbox" v-model="x.done"/>
+            <span :class="`bubble ${x.category}`"></span>
+          </label>
+          <div class="todo-content"></div>
+            <input type="text" v-model="x.content"/>
+        </div>
+      </div>
     </section>
 
   </main>
